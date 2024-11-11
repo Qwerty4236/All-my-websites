@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>My Ai</title>
+</head>
+<body>
+
+  <main>
+    <div class="inp">
+      <label for="description">Description/Vibe</label>
+      <textarea name="description" id="area" cols="30" rows="10" placeholder="ex: Love and hate, Summer vibe"></textarea>
+      <button>Generate</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>MADE by QWERTYACH</p>
+  </footer>
+  
+
+
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+
+
+    
+    const API_KEY = "AIzaSyC7vdxD9bBt19lcDPowM1AkWkbhO2TFDRg";
+    const SPOTIFY_API_KEY='8aba7e6d964641209b108bbd62360407';
+    const genAI = new GoogleGenerativeAI(API_KEY);
+    const day=new Date()
+    
+
+    const cli_cred='3efc06ec66e24cb097a75dedee33298d:8d3f345ffa5549c8bd1d94f02969a5da'
+    const cli_base=btoa(cli_cred)
+    const main=document.querySelector('main')
+
+    const header=await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: {
+        "Authorization": `Basic ${cli_base}`,
+        "Content-Type":"application/x-www-form-urlencoded"
+      },
+      body:new URLSearchParams({
+        'grant_type': 'client_credentials',
+      })
+      
+    }).then((result)=>{
+      return result.json()
+    }).then((res)=>{
+      return res
+    })
+    const innt=document.getElementById('area')
+    const run = async () => {
+
+      main.innerHTML='<div class="loader"></div>'
+      const input=(innt.value.trim()==null || innt.value.trim()=='') ?
+      "":`about ${innt.value}`
+
+      const prompt = `today is the ${day.toDateString()}. Give me an album recomendation ${input} with the artist_name, album_name, \
+      genre and the mood, and a little short description of the project in a good json syntax with no additional key ellement`
+      
+      const safetySettings = [
+      {
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+        threshold: HarmBlockThreshold.BLOCK_NONE,
+      },
+    ];
+      try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro",safetySettings});
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      const ico=JSON.parse(text.replace('```json','').replace('```',''))
+      console.log(ico)
+      
+      const resss=await fetch(`https://api.spotify.com/v1/search?q=${ico.artist_name}+${ico.album_name}&type=album`,{
+        method:"GET",
+        headers:{'Authorization':`${header.token_type} ${header.access_token}`}
+      }).then((res)=>{
+        return res.json()
+      }).then((res)=>{
+        return (res.albums.items[0])
+      })
+      console.log(resss)
+
+      const file={image:resss.images[0].url,url:`https://open.spotify.com/album/${resss.id}`,artist:resss.artists[0].name,
+      albumName:ico.album_name,desc:ico.description,mood:ico.mood,artistUrl:resss.artists[0].external_urls.spotify}
+
+      console.log(file)
+      main.innerHTML=`
+      <div style='background-image:url(${file.image})' class='box'>
+        <h3>${file.albumName}</h3>
+        <h3>by <a href="${file.artistUrl}" target="_blank">${file.artist}</a></h3>
+        <h5>${file.mood}</h5>
+        <p>${file.desc}</p>
+        <a class="a" href="${file.url}" target="_blank"><i><svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" class="Svg-sc-ytk21e-0 bRkBFt">
+          <path d="M12 1a11 11 0 1 0 0 22 11 11 0 0 0 0-22zm5.045 15.866a.686.686 0 0 1-.943.228c-2.583-1.579-5.834-1.935-9.663-1.06a.686.686 0 0 1-.306-1.337c4.19-.958 7.785-.546 10.684 1.226a.686.686 0 0 1 .228.943zm1.346-2.995a.858.858 0 0 1-1.18.282c-2.956-1.817-7.464-2.344-10.961-1.282a.856.856 0 0 1-1.11-.904.858.858 0 0 1 .611-.737c3.996-1.212 8.962-.625 12.357 1.462a.857.857 0 0 1 .283 1.179zm.116-3.119c-3.546-2.106-9.395-2.3-12.78-1.272a1.029 1.029 0 0 1-.597-1.969c3.886-1.18 10.345-.952 14.427 1.471a1.029 1.029 0 0 1-1.05 1.77z"></path>
+        </svg></i>see in spotify</a>
+      </div>
+      `
+    }catch(err){
+      main.innerHTML='<div class="loaders"></div>'
+      console.log(err)
+      return 1
+    }
+    }
+    document.querySelector('button').addEventListener('click',run)
+    document.querySelector('body').addEventListener('keypress',(e)=>{
+      if (e.key === 'Enter') {
+        run()
+      }
+    })
+  </script>
+</body>
+</html>
