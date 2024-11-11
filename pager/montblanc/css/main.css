@@ -1,0 +1,82 @@
+main{
+  overflow: hidden;
+  width: 80%;
+}
+.left{
+  position: relative;
+  background-color: #060507;
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.img .bike{
+  width: 80%;
+  height: 370px;
+  object-fit: cover;
+}
+.round{
+  width: 13%;
+  position: absolute;
+  right: 13px;
+  top: 30px;
+  animation: rotate 10s infinite linear;
+}
+.rigth img{
+  width: 100%;
+  object-fit: cover;
+}
+.rigth img:nth-child(1){
+  height: 300px;
+}
+.rigth{
+  object-fit: cover;
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  top:0;
+}
+.sec{
+  padding-left: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.main{
+  display: flex;
+}
+.slider{
+  width: 56%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+.slider p{
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+.slider div{
+  border: 10px;
+  width: 50%;
+  height: 2px;
+  background-color: #ffffff;
+  position: relative;
+}
+.slider div::before{
+  content: '';
+  width: 50%;
+  height: 2px;
+  background-color: #A75B12;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sec .text p{
+  font-family: "Montserrat",helvetica,Arial,sans-serif;
+  font-size: 12px;
+  width: 90%;
+  margin: 0;
+}

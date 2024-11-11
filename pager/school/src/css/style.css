@@ -1,0 +1,633 @@
+body {
+  font-family: Inter, Helvetica, sans-serif;
+  font-weight: 900;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -2px;
+  position: relative;
+}
+body * {
+  transition: 0.5s;
+}
+body header {
+  z-index: 100;
+  width: calc(100% - 80px);
+  position: fixed;
+  display: flex;
+  padding: 20px 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+body header .logo {
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+}
+body header .logo img {
+  width: 40px;
+}
+body header .logo h3 {
+  font-size: 0;
+  font-weight: 900;
+  letter-spacing: -2px;
+  animation-name: pop;
+  animation-duration: 1s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+body header .link {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+body header .link li {
+  cursor: pointer;
+  scale: 0;
+  overflow: hidden;
+  list-style: none;
+  border: solid 1px #000;
+  padding: 5px 10px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  animation-name: fonnt;
+  animation-duration: 0.7s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+body header .link li:nth-child(2) {
+  animation-delay: 0.4s;
+}
+body header .link li:nth-child(3) {
+  animation-delay: 0.6s;
+}
+body header .link li::before {
+  content: "";
+  transition: 0.7s;
+  z-index: -1;
+  background-color: #2BD886;
+  background-position: -100px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -1000px;
+  left: 0;
+}
+body header .link li:hover::before {
+  bottom: 0;
+}
+body header .link li a {
+  color: #000;
+  text-decoration: none;
+}
+body header .account {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 24px;
+}
+body header .account img {
+  scale: 0;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #000;
+  animation-name: fonnt;
+  animation-duration: 0.6s;
+  animation-delay: 0.6s;
+  animation-fill-mode: forwards;
+}
+body header .account i svg {
+  scale: 0;
+  width: 24px;
+  animation-name: fonnt;
+  animation-duration: 0.6s;
+  animation-delay: 0.7s;
+  animation-fill-mode: forwards;
+}
+body header .account .burger {
+  display: none;
+  width: 60px;
+  height: 10px;
+  position: relative;
+  transition: 0.4s;
+  cursor: pointer;
+}
+body header .account .burger span:nth-child(1) {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  background-color: #000;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+body header .account .burger span:nth-child(2) {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  background-color: #000;
+  bottom: 0;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+body header .account .close span:nth-child(1) {
+  animation-name: bigx;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+body header .account .close span:nth-child(2) {
+  animation-name: big-x;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+body header .account .open span:nth-child(1) {
+  animation-name: bigy;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+body header .account .open span:nth-child(2) {
+  animation-name: big-y;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+body main {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+body main section {
+  scroll-snap-align: start;
+}
+body main section.preview {
+  display: flex;
+  height: 100Vh;
+  background-color: #FFA6F1;
+}
+body main section.preview div {
+  overflow: hidden;
+  width: 34vw;
+  height: 100vh;
+  background-color: #FFA6F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main section.preview div img {
+  width: 80%;
+  animation-name: mouve;
+  animation-duration: 2s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+body main section.preview .model {
+  height: 0;
+  width: 33vw;
+  object-fit: cover;
+  animation-name: zoom;
+  animation-duration: 1.7s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+body main section.preview .model:nth-child(3) {
+  animation-delay: 0.6s;
+}
+body main section.discover {
+  height: 100vh;
+  padding: 20px 40px 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+body main section.discover .disco {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+body main section.discover .disco .image {
+  scale: 0;
+  width: 40vw;
+  height: 50vh;
+  height: calc(40vh - 2vw);
+  border-radius: 10px;
+  object-fit: cover;
+}
+body main section.discover .disco .text .ttl {
+  position: relative;
+}
+body main section.discover .disco .text .ttl h1 {
+  font-size: 4vw;
+  margin: 0;
+  margin-top: 70px;
+  text-wrap: nowrap;
+  width: 0;
+  animation-delay: 0.2s;
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+}
+body main section.discover .disco .text .ttl img {
+  position: absolute;
+  left: -20px;
+  bottom: -10px;
+  width: 40vw;
+  z-index: 1;
+  overflow: hidden;
+}
+body main section.discover .disco .text p {
+  width: 40vw;
+  letter-spacing: -1.4px;
+  font-size: 1.2vw;
+  font-weight: 800;
+}
+body main section.discover .cards {
+  display: flex;
+  justify-content: space-between;
+  height: 30vh;
+}
+body main section.discover .cards * {
+  margin: 0;
+}
+body main section.discover .cards .card {
+  scale: 0;
+  padding: 16px 30px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  width: 20%;
+}
+body main section.discover .cards .card:nth-child(1) {
+  background-color: #2BD886;
+}
+body main section.discover .cards .card:nth-child(1) .img {
+  position: absolute;
+  bottom: 0;
+  width: 10vw;
+  left: -30px;
+  z-index: 1;
+}
+body main section.discover .cards .card:nth-child(2) {
+  background-color: #FF6CCD;
+  animation-delay: 0.2s;
+}
+body main section.discover .cards .card:nth-child(2) .img {
+  position: absolute;
+  width: 10vw;
+  top: 0;
+  right: 0;
+  transform: rotate(20deg);
+  z-index: 1;
+}
+body main section.discover .cards .card:nth-child(3) {
+  background-color: #5DC5DC;
+  animation-delay: 0.4s;
+}
+body main section.discover .cards .card:nth-child(3) .img {
+  position: absolute;
+  width: 40vw;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+body main section.discover .cards .card img {
+  width: 12vw;
+  z-index: 3;
+  position: relative;
+}
+body main section.discover .cards .card .comment {
+  width: 16vw;
+  font-weight: 700;
+  font-size: 1vw;
+  letter-spacing: -1.4px;
+  z-index: 1000;
+  position: relative;
+}
+body main section.discover .cards .card .name {
+  position: relative;
+  z-index: 3;
+  font-size: 1.3vw;
+  letter-spacing: -1px;
+}
+body main section.pricing {
+  padding: 30px 40px 10px 40px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+body main section.pricing h1 {
+  font-size: 100px;
+  letter-spacing: -8px;
+  margin: 0;
+  margin-top: 70px;
+}
+body main section.pricing .cards {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  height: 100%;
+}
+body main section.pricing .cards .card {
+  scale: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+}
+body main section.pricing .cards .card img {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+}
+body main section.pricing .cards .card * {
+  margin: 0;
+  position: relative;
+}
+body main section.pricing .cards .card:nth-child(1) {
+  background-color: #FF6CCD;
+}
+body main section.pricing .cards .card:nth-child(1) img {
+  left: 0;
+}
+body main section.pricing .cards .card:nth-child(2) {
+  background-color: #5DC5DC;
+  animation-delay: 0.2s;
+}
+body main section.pricing .cards .card:nth-child(2) img {
+  right: 0;
+}
+body main section.pricing .cards .card h2 {
+  color: #fff;
+  font-size: 5vw;
+  letter-spacing: -8px;
+}
+body main section.pricing .cards .card .adv {
+  font-size: 2.4vw;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+body main section.pricing .cards .card .price {
+  font-size: 2.4vw;
+  color: #fff;
+}
+body .is-visible {
+  animation-name: fonnt;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+body .is-trans {
+  animation-name: boom;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.4s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes zoom {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+@keyframes pop {
+  from {
+    font-size: 0;
+  }
+  to {
+    font-size: 30px;
+  }
+}
+@keyframes boom {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes fonnt {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+@keyframes mouve {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes bigx {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  80% {
+    transform: translateY(4px) rotate(0);
+  }
+  100% {
+    transform: translateY(4px) rotate(45deg);
+  }
+}
+@keyframes big-x {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  80% {
+    transform: translateY(-4px) rotate(0);
+  }
+  100% {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+}
+@keyframes bigy {
+  0% {
+    transform: translateY(4px) rotate(45deg);
+  }
+  80% {
+    transform: translateY(4px) rotate(0);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@keyframes big-y {
+  0% {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+  80% {
+    transform: translateY(-4px) rotate(0);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@media screen and (max-width: 900px) {
+  body header {
+    background-color: rgba(255, 255, 255, 0.2392156863);
+  }
+  body header .burger {
+    display: block !important;
+  }
+  body header .openli {
+    height: 100vh !important;
+  }
+  body header .link {
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    flex-direction: column;
+    gap: 0;
+    top: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  body header .link li {
+    width: 100%;
+    border-radius: 0;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vw;
+  }
+  body header .link li:nth-child(2)::before {
+    background-color: #FF6CCD;
+  }
+  body header .link li:nth-child(3)::before {
+    background-color: #5DC5DC;
+  }
+  body header .link li a {
+    letter-spacing: -1vw;
+  }
+  body header .account img {
+    display: none;
+  }
+  body header .account i {
+    display: none;
+  }
+  body main section.pricing .cards {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 70vw;
+    float: left;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: transparent transparent;
+    scrollbar-width: thin;
+    align-items: center;
+  }
+  body main section.pricing .cards .card {
+    scale: 1;
+    height: 40vh;
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+    width: 40vw;
+    gap: 30px;
+  }
+  body main section.pricing .cards .card img {
+    width: 60vw;
+    height: 100%;
+  }
+  body main section.pricing .cards .card h2 {
+    font-size: 5vw;
+    letter-spacing: -1px;
+  }
+  body main section.pricing .cards .card .adv {
+    font-size: calc(1vw + 10px);
+    letter-spacing: -1.3px;
+  }
+  body main section.pricing .cards .card .price {
+    font-size: calc(1vw + 10px);
+    letter-spacing: -1px;
+  }
+  body main section.discover {
+    padding-top: 40px;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+  }
+  body main section.discover .disco {
+    display: block;
+  }
+  body main section.discover .disco .text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  body main section.discover .disco .text .ttl {
+    height: 100%;
+  }
+  body main section.discover .disco .text .ttl img {
+    width: 70vw;
+  }
+  body main section.discover .disco .text .ttl .nico {
+    margin-top: 80px;
+    font-size: 8vw;
+  }
+  body main section.discover .disco .text p {
+    height: 100%;
+    font-size: calc(1vw + 8px);
+    letter-spacing: -1px;
+    width: 100%;
+  }
+  body main section.discover .image {
+    display: none;
+    flex-wrap: nowrap;
+  }
+  body main section.discover .cards {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow-x: auto;
+    gap: 10px;
+    scroll-snap-type: x mandatory;
+    width: 80vw;
+  }
+  body main section.discover .cards .card {
+    scale: 1;
+    flex: 0 0 auto;
+    width: 40vw;
+    scroll-snap-align: center;
+    height: 100px;
+  }
+  body main section.discover .cards .card .comment {
+    font-size: calc(0.1vw + 8px);
+    letter-spacing: -1px;
+    width: 100%;
+  }
+  body main section.discover .cards .card .name {
+    font-size: calc(1vw + 4px);
+  }
+  body main section.discover .cards .card:nth-child(1) .img {
+    width: calc(14vw + 10px);
+  }
+  body main section.discover .cards .card:nth-child(2) .img {
+    width: 14vw;
+  }
+  body main section.discover .cards .card:nth-child(3) .img {
+    width: 40vw;
+  }
+}/*# sourceMappingURL=style.css.map */

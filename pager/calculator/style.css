@@ -1,0 +1,116 @@
+body{
+  height:97vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.body{
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4,4rem);
+  grid-template-rows: repeat(6,4rem);
+  grid-template-areas:
+  "text text text text" 
+  "ac ac del plus" 
+  "one two three kisma" 
+  "four five six mult" 
+  "seven eight nine min" 
+  ". zero point equal";
+  gap: 1rem;
+  background-color: #2a2a2a;
+  width: 19rem;
+  padding: 20px;
+  border-radius: 10px;
+}
+input[value='1']{
+  grid-area: one;
+}
+input[value='2']{
+  grid-area: two;
+}
+input[value='3']{
+  grid-area: three;
+}
+input[value='4']{
+  grid-area: four;
+}
+input[value='5']{
+  grid-area: five;
+}
+input[value='6']{
+  grid-area: six;
+}
+input[value='7']{
+  grid-area: seven
+}
+input[value='8']{
+  grid-area: eight;
+}
+input[value='9']{
+  grid-area: nine;
+}
+input[value='0']{
+  grid-area: zero;
+}
+input[value='+']{
+  grid-area: plus;
+}
+input[value='*']{
+  grid-area: mult;
+}
+input[value='-']{
+  grid-area: min;
+}
+input[value='/']{
+  grid-area: kisma;
+}
+input[value='.']{
+  grid-area: point;
+}
+input[value='=']{
+  grid-area: equal;
+}
+input[value='AC']{
+  grid-area: ac;
+}
+input[value='Del']{
+  grid-area: del;
+}
+input[type='text']{
+  grid-area: text;
+  background-color: #2a2a2a;
+  color:#fff;
+  border-color: #2a2a2a;
+  box-shadow: 
+  inset -3px -3px 10px #3b3b3b92,
+  inset 3px 3px 10px #1b1b1b92
+  ;
+  padding: 0 10px;
+}
+
+input{
+  font-size: 30px;
+  border-radius:8px;
+}
+input[type=button]{
+  transition:all 0.5s;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  background-color: #2a2a2a;
+  box-shadow: 
+  -3px -1px 6px #3b3b3bca,
+  3px 3px 10px #1b1b1b92,
+  inset 0px 0px 0px #3b3b3bca,
+  inset 0px 0px 0px #1b1b1b92
+  ;
+}
+input[type=button]:focus{
+  box-shadow:
+  -0px -0px 0px #3b3b3bca,
+  0px 0px 0px #1b1b1b92,
+  inset -3px -1px 6px #3b3b3bca,
+  inset 3px 3px 10px #1b1b1b92
+  ;
+}
